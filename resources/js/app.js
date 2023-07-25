@@ -11,9 +11,9 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: EmployeeList },
-        { path: '/products/create', component: EmployeeForm },
-        { path: '/products/:id', component: Employee },
-        { path: '/products/:id/edit', component: EmployeeForm },
+        { path: '/colaborador/criar', component: EmployeeForm },
+        { path: '/colaborador/:id', component: Employee },
+        { path: '/colaborador/:id/editar', component: EmployeeForm },
     ]
 });
 
