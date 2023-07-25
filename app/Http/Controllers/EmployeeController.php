@@ -12,7 +12,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return Employee::all();
     }
 
     /**
@@ -20,7 +20,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,7 +28,14 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required',
+            'daytime' => 'required',
+            'nightTime' => 'required',
+        ]);
+
+        return Employee::create($request->all());
     }
 
     /**
@@ -36,7 +43,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return $employee;
     }
 
     /**
@@ -52,7 +59,16 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required',
+            'daytime' => 'required',
+            'nightTime' => 'required',
+        ]);
+
+        $employee->update($request->all());
+
+        return $employee;
     }
 
     /**
@@ -60,6 +76,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return response()->json(['message' => 'Employee deleted successfully']);
     }
 }
