@@ -5,6 +5,55 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
+// Função para calcular as horas noturnas e diurnas
+function convertToMinutes($timeString) {
+    list($horas, $minutos) = explode(':', $timeString);
+
+    return ($horas * 60) + $minutos;
+}
+
+function convertToTimeString($totalMinutes) {
+    $hours = floor($totalMinutes / 60);
+    $minutes = $totalMinutes % 60;
+
+    return sprintf("%02d:%02d", $hours, $minutes);
+}
+
+function calcularHorasNoturnasDiurnas($initial, $final) {
+    $minutesInitial = convertToMinutes($initial);
+    $minutesFinal = convertToMinutes($final);
+
+    $daytimeHours = 0;
+    $nightTimeHours = 0;
+
+    // Tempo convertido de horas para minutos
+    $twoHours = 120;
+    $fiveHours = 300;
+    $twentyTwoHours = 1320;
+    $twentyFourHours = 1440;
+
+    if ($minutesInitial >= $twentyTwoHours && $minutesFinal <= $twentyFourHours) {
+        $nightTimeHours += $twentyFourHours - $minutesInitial;
+    }
+
+    if ($minutesInitial >= $fiveHours && $minutesFinal <= $twentyTwoHours && $minutesInitial < $minutesFinal) {
+        $daytimeHours += $minutesFinal - $minutesInitial;
+    }
+
+    if ($minutesInitial >= $fiveHours && $minutesFinal > $twentyTwoHours && $minutesFinal <= $twentyFourHours) {
+        $daytimeHours += $twentyTwoHours - $minutesInitial;
+        $nightTimeHours += $minutesFinal - $twentyTwoHours;
+    }
+
+    if ($minutesInitial >= 0 && $minutesInitial <= $fiveHours) {
+        $nightTimeHours += $fiveHours - $minutesInitial;
+    }
+
+    dd(convertToTimeString($daytimeHours), convertToTimeString($nightTimeHours));
+    // $result = $minutesFinal - $minutesInitial;
+}
+
+
 class EmployeeController extends Controller
 {
     /**
@@ -35,7 +84,9 @@ class EmployeeController extends Controller
             'nightTime' => 'required',
         ]);
 
-        return Employee::create($request->all());
+        $resultado = calcularHorasNoturnasDiurnas($request->daytime, $request->nightTime);
+
+        // return Employee::create($request->all());
     }
 
     /**
