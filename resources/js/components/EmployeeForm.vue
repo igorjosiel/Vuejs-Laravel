@@ -1,7 +1,7 @@
 <template>
   <div>
-      <h2 v-if="isNewProduct">Add Product</h2>
-      <h2 v-else>Edit Product</h2>
+      <h2 v-if="isNewEmployee">Adicionar Colaborador</h2>
+      <h2 v-else>Editar Colaborador</h2>
 
       <form @submit.prevent="submitForm" novalidate>
         <fieldset>
@@ -46,7 +46,7 @@
             <legend>Intervalo de horas trabalhado:</legend>
             <div class="mb-3">
                 <label
-                    for="daytime"
+                    for="initialTime"
                     class="form-label"
                     aria-label="Campo para digitar a hora inicial de trabalho">
                         Hora inicial:
@@ -54,8 +54,8 @@
                 <input
                     class="form-control"
                     type="text"
-                    id="daytime"
-                    v-model="employee.daytime"
+                    id="initialTime"
+                    v-model="employee.initialTime"
                     size="5"
                     maxlength="5"
                     v-mask="'##:##'"
@@ -64,7 +64,7 @@
             </div>
             <div class="mb-3">
                 <label
-                    for="nightTime"
+                    for="finalTime"
                     class="form-label"
                     aria-label="Campo para digitar a hora final de trabalho">
                         Hora final:
@@ -72,8 +72,8 @@
                 <input
                     class="form-control"
                     type="text"
-                    id="nightTime"
-                    v-model="employee.nightTime"
+                    id="finalTime"
+                    v-model="employee.finalTime"
                     size="5"
                     maxlength="5"
                     v-mask="'##:##'"
@@ -82,7 +82,7 @@
             </div>
         </fieldset>
 
-        <button type="submit" v-if="isNewProduct" class="btn btn-primary">Calcular</button>
+        <button type="submit" v-if="isNewEmployee" class="btn btn-primary">Calcular</button>
         <button type="submit" v-else class="btn btn-primary">Update Product</button>
       </form>
   </div>
@@ -103,12 +103,12 @@
             }
         },
         computed: {
-            isNewProduct() {
+            isNewEmployee() {
                 return !this.$route.path.includes('editar');
             }
         },
         async created() {
-            if (!this.isNewProduct) {
+            if (!this.isNewEmployee) {
                 const response = await axios.get(`/api/employees/${this.$route.params.id}`);
 
                 this.product = response.data;
@@ -117,7 +117,7 @@
         methods: {
             async submitForm() {
                 try {
-                    if (this.isNewProduct) {
+                    if (this.isNewEmployee) {
                         await axios.post('/api/employees', this.employee);
                     } else {
                         await axios.put(`/api/employees/${this.$route.params.id}`, this.employee);
