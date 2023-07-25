@@ -21,6 +21,7 @@
                       <div class="row gap-3">
                         <router-link :to="`/employees/${employee.id}`" class="p-2 col border btn btn-primary">View</router-link>
                         <router-link :to="`/employees/${employee.id}/edit`" class="p-2 col border btn btn-success">Edit</router-link>
+
                         <button @click="deleteEmployee(employee.id)" type="button" class="p-2 col border btn btn-danger">Delete</button>
                       </div>
                     </td>

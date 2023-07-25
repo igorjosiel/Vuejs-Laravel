@@ -22,6 +22,8 @@
             id="cpf"
             placeholder="CPF"
             v-model="employee.cpf"
+            size="14"
+            maxlength="14"
             required
           />
         </div>
@@ -32,6 +34,8 @@
             type="text"
             id="daytime"
             v-model="employee.daytime"
+            size="5"
+            maxlength="5"
             required
           />
         </div>
@@ -42,6 +46,8 @@
             type="text"
             id="nightTime"
             v-model="employee.nightTime"
+            size="5"
+            maxlength="5"
             required
           />
         </div>
