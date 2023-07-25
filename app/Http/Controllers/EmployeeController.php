@@ -49,8 +49,25 @@ function calcularHorasNoturnasDiurnas($initial, $final) {
         $nightTimeHours += $fiveHours - $minutesInitial;
     }
 
-    dd(convertToTimeString($daytimeHours), convertToTimeString($nightTimeHours));
-    // $result = $minutesFinal - $minutesInitial;
+    if ($minutesInitial < $twentyTwoHours && $minutesFinal >= 0 && $minutesFinal <= $fiveHours) {
+        $daytimeHours += $twentyTwoHours - $minutesInitial;
+        $nightTimeHours += $twoHours + ($fiveHours - $minutesFinal);
+    }
+
+    if ($minutesInitial < $twentyTwoHours && $minutesFinal >= 0 && $minutesFinal > $fiveHours) {
+        $daytimeHours += $twentyTwoHours - $minutesInitial + ($minutesFinal - $fiveHours);
+        $nightTimeHours += $twoHours + $fiveHours;
+    }
+
+    if ($minutesInitial > $twentyTwoHours && $minutesFinal >= 0 && $minutesFinal > $fiveHours) {
+        $daytimeHours += $minutesFinal - $fiveHours;
+        $nightTimeHours += $fiveHours + $twentyFourHours - $minutesInitial;
+    }
+
+    return [
+        "daytimeHours" => convertToTimeString($daytimeHours),
+        "nightTimeHours" => convertToTimeString($nightTimeHours),
+    ];
 }
 
 
@@ -84,9 +101,12 @@ class EmployeeController extends Controller
             'nightTime' => 'required',
         ]);
 
-        $resultado = calcularHorasNoturnasDiurnas($request->daytime, $request->nightTime);
+        $result = calcularHorasNoturnasDiurnas($request->daytime, $request->nightTime);
 
-        // return Employee::create($request->all());
+        $request->daytime = $result['daytimeHours'];
+        $request->nightTime = $result['nightTimeHours'];
+
+        return Employee::create($request->all());
     }
 
     /**
