@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2 v-if="isNewProduct">Add Product</h2>
-    <h2 v-else>Edit Product</h2>
+      <h2 v-if="isNewProduct">Add Product</h2>
+      <h2 v-else>Edit Product</h2>
+
       <form @submit.prevent="submitForm" novalidate>
         <fieldset>
             <legend>Dados pessoais</legend>
