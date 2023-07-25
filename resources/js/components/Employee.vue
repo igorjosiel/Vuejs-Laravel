@@ -1,12 +1,14 @@
 <template>
     <div>
-        <h5 id="associating-form-text-with-form-controls">Name:</h5>
-        <h6>{{ product.name }}</h6>
-        <h5 id="associating-form-text-with-form-controls">Description:</h5>
-        <p>{{ product.description }}</p>
-        <h5 id="associating-form-text-with-form-controls">Price:</h5>
-        <p>Price: {{ product.price }}</p>
-        <router-link :to="`/products/${product.id}/edit`" class="btn btn-primary">Edit</router-link>
+        <h5 id="associating-form-text-with-form-controls">Colaborador:</h5>
+        <h6>{{ employee.name }}</h6>
+        <h5 id="associating-form-text-with-form-controls">CPF:</h5>
+        <p>{{ employee.cpf }}</p>
+        <h5 id="associating-form-text-with-form-controls">Horas diurnas:</h5>
+        <p>{{ employee.daytime }}</p>
+        <h5 id="associating-form-text-with-form-controls">Horas noturnas:</h5>
+        <p>{{ employee.daytime }}</p>
+        <router-link :to="`/colaborador/${employee.id}/editar`" class="btn btn-primary">Editar</router-link>
     </div>
 </template>
 
@@ -16,13 +18,14 @@
     export default {
         data() {
             return {
-                product: {}
+                employee: {}
             }
         },
         async created() {
             try {
-                const response = await axios.get(`/api/products/${this.$route.params.id}`);
-                this.product = response.data;
+                const response = await axios.get(`/api/employees/${this.$route.params.id}`);
+
+                this.employee = response.data;
             } catch (error) {
                 console.error(error);
             }

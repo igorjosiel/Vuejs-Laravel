@@ -4,23 +4,24 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Colaborador</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Horas diurnas</th>
+                <th scope="col">Horas noturnas</th>
               </tr>
             </thead>
             <tbody>
-                <tr v-for="product in products" :key="product.id">
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.price }}</td>
+                <tr v-for="employee in employees" :key="employee.id">
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.cpf }}</td>
+                    <td>{{ employee.daytime }}</td>
+                    <td>{{ employee.nightTime }}</td>
                     <td>
                       <div class="row gap-3">
-                        <router-link :to="`/products/${product.id}`" class="p-2 col border btn btn-primary">View</router-link>
-                        <router-link :to="`/products/${product.id}/edit`" class="p-2 col border btn btn-success">Edit</router-link>
-                        <button @click="deleteProduct(product.id)" type="button" class="p-2 col border btn btn-danger">Delete</button>
+                        <router-link :to="`/employees/${employee.id}`" class="p-2 col border btn btn-primary">View</router-link>
+                        <router-link :to="`/employees/${employee.id}/edit`" class="p-2 col border btn btn-success">Edit</router-link>
+                        <button @click="deleteEmployee(employee.id)" type="button" class="p-2 col border btn btn-danger">Delete</button>
                       </div>
                     </td>
                 </tr>
@@ -35,26 +36,26 @@
     export default {
         data() {
             return {
-                products: []
+                employees: []
             }
         },
         async created() {
             try {
-                const response = await axios.get('/api/products');
+                const response = await axios.get('/api/employees');
 
-                this.products = response.data;
+                this.employees = response.data;
             } catch (error) {
                 console.error(error);
             }
         },
         methods: {
-            async deleteProduct(id) {
+            async deleteEmployee(id) {
 
             try {
-                await axios.delete(`/api/products/${id}`);
+                await axios.delete(`/api/employees/${id}`);
 
-                this.products = this.products.filter(product => product.id !== id);
-            }   catch (error) {
+                this.employees = this.employees.filter(employee => employee.id !== id);
+            }  catch (error) {
                     console.error(error);
                 }
             }
