@@ -37,6 +37,7 @@
                     v-model="employee.cpf"
                     size="14"
                     maxlength="14"
+                    v-mask="'###.###.###-##'"
                     required
                 />
             </div>
@@ -57,6 +58,7 @@
                     v-model="employee.daytime"
                     size="5"
                     maxlength="5"
+                    v-mask="'##:##'"
                     required
                 />
             </div>
@@ -74,6 +76,7 @@
                     v-model="employee.nightTime"
                     size="5"
                     maxlength="5"
+                    v-mask="'##:##'"
                     required
                 />
             </div>

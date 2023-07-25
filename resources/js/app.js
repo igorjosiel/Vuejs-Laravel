@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import VueTheMask from 'vue-the-mask';
 import { createRouter, createWebHistory } from 'vue-router';
 
 // Import components
@@ -19,4 +20,5 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router);
+app.use(VueTheMask);
 app.mount('#app');
