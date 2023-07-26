@@ -33,14 +33,16 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required',
             'cpf' => 'required',
-            'daytime' => 'required',
-            'nightTime' => 'required',
+            'initialTime' => 'required',
+            'finalTime' => 'required',
         ]);
 
-        $result = calculateDayTimeAndNightTime($request->daytime, $request->nightTime);
+        $result = calcularHorasNoturnasDiurnas($request->initialTime, $request->finalTime);
 
-        $request->daytime = $result['daytimeHours'];
-        $request->nightTime = $result['nightTimeHours'];
+        $request->merge([
+            'daytime' => $result['daytimeHours'],
+            'nightTime' => $result['nightTimeHours'],
+        ]);
 
         return Employee::create($request->all());
     }
@@ -69,6 +71,8 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required',
             'cpf' => 'required',
+            'initialTime' => 'required',
+            'finalTime' => 'required',
             'daytime' => 'required',
             'nightTime' => 'required',
         ]);

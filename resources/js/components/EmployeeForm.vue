@@ -97,8 +97,8 @@
                 employee: {
                     name: '',
                     cpf: '',
-                    initialTime: 0,
-                    finalTime: 0,
+                    initialTime: '',
+                    finalTime: '',
                 }
             }
         },

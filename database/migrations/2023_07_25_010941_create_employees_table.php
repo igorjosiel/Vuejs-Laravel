@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf');
+            $table->string('initialTime');
+            $table->string('finalTime');
             $table->string('daytime');
             $table->string('nightTime');
             $table->timestamps();

@@ -12,6 +12,8 @@ class Employee extends Model
     protected $fillable = [
         'name',
         'cpf',
+        'initialTime',
+        'finalTime',
         'daytime',
         'nightTime',
     ];
