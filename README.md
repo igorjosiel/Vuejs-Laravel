@@ -11,15 +11,15 @@ Projeto desenvolvido com as tecnologias: HTML, CSS, Javascript, Vue, PHP, Larave
 
 Versões utilizadas:
 
-PHP - 8.1.21
-Node - 16.13.2
-composer 2.5.8
-npm 8.1.2
+PHP - 8.1.21 <br>
+Node - 16.13.2 <br>
+composer - 2.5.8 <br>
+npm - 8.1.2 <br>
 
 Comandos para rodar o projeto:
 
-php artisan migrate - Comando da migration para criar a tabela de colaboradores (Employees)
-npm install ou yarn install - baixar todas as dependências e bibliotecas Javascript
-composer install - instalar as dependências do back-end (PHP)
-php artisan serve - iniciar o servidor do Laravel e tornar o projeto acessível por uma URL no navegador
-npm run dev - Laravel Mix (que é uma wrapper do Webpack para o Laravel) compilará e mesclará os arquivos de estilo e scripts
+php artisan migrate => Comando da migration para criar a tabela de colaboradores (Employees) <br>
+npm install ou yarn install => baixar todas as dependências e bibliotecas Javascript <br>
+composer install => instalar as dependências do back-end (PHP) <br>
+php artisan serve => iniciar o servidor do Laravel e tornar o projeto acessível por uma URL no navegador <br>
+npm run dev => Laravel Mix (que é uma wrapper do Webpack para o Laravel) compilará e mesclará os arquivos de estilo e scripts <br>
